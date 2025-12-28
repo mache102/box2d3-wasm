@@ -1704,6 +1704,7 @@ EMSCRIPTEN_BINDINGS(box2d) {
     function("b2Body_GetLinearVelocity", &b2Body_GetLinearVelocity);
     function("b2Body_GetAngularVelocity", &b2Body_GetAngularVelocity);
     function("b2Body_SetLinearVelocity", &b2Body_SetLinearVelocity);
+    function("b2Body_SetPistonVelocity", &b2Body_SetPistonVelocity);
     function("b2Body_SetAngularVelocity", &b2Body_SetAngularVelocity);
     function("b2Body_ApplyForce", &b2Body_ApplyForce);
     function("b2Body_ApplyForceToCenter", &b2Body_ApplyForceToCenter);

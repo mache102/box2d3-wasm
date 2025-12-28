@@ -108,3 +108,33 @@ export const {
   // ...
 } = box2d;
 ```
+
+## Piston Velocity
+
+A new function `b2Body_SetPistonVelocity` has been exposed:
+
+```cpp
+/// Set the piston velocity of a body. Usually in meters per second.
+/// The velocity must be axis aligned (x or y).
+/// This velocity is applied for one time step and then reset to zero.
+/// Dynamic bodies touching the piston will be pushed but will not acquire the velocity.
+void b2Body_SetPistonVelocity( b2BodyId bodyId, b2Vec2 velocity );
+```
+
+## Adding new functions
+
+To add new functions to the Box2D WASM module, follow these steps:
+- Add it in `box2d3-wasm/csrc/glue.cpp` and bind it using `EMSCRIPTEN_BINDINGS`. 
+Example; we added it between these two, for SetPistonVelocity:
+
+
+```cpp
+    function("b2Body_SetLinearVelocity", &b2Body_SetLinearVelocity);
+    function("b2Body_SetPistonVelocity", &b2Body_SetPistonVelocity);
+    function("b2Body_SetAngularVelocity", &b2Body_SetAngularVelocity);
+```
+Then re-run build scripts (starting from here):
+
+```bash
+FLAVOUR=compat TARGET_TYPE=Release ./shell/0_build_makefile.sh
+```
