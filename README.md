@@ -11,7 +11,12 @@
     ```
 
 ```bash
+# the box2d3-wasm directory **inside** the repo (also called box2d3-wasm)
 cd box2d3-wasm  
+
+# pull updated box2d submodule 
+git submodule update --init --recursive --remote
+
 rm -rf cmake-build-compat
 
 FLAVOUR=compat TARGET_TYPE=Release ./shell/0_build_makefile.sh
@@ -21,10 +26,10 @@ emmake make -j8 -C cmake-build-compat
 FLAVOUR=compat TARGET_TYPE=Release ./shell/1_build_wasm.sh
 ```
 
-Files are produced in `box2d3-wasm/build/dist/es/compat/`.
+Files are produced in `box2d3-wasm/build/dist/es/compat/` (relative to the base `box2d3-wasm` directory).
 
-```
-ls build/dist/es/compat/
+```bash
+ls build/dist/es/compat/ # assumes you are in ./box2d3-wasm  (relative to repo root)
 
 Box2D.compat.d.ts  
 Box2D.compat.mjs  
@@ -47,7 +52,7 @@ Box2D.compat.wasm
 
 Copy `.d.ts` and `.mjs` to a folder in your project, i.e. `src/lib/box2d3-custom/`.
 
-Add to `vite.config.js`:
+Add to `vite.config.js` (if not already done): 
 ```js
 alias: {
   'box2d3_dist': path.resolve(__dirname, 'src/lib/box2d3-custom/Box2D.compat.mjs'),
